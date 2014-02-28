@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>Controller</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+</head>
+<body ng-app="">
+
+	<div class="container" ng-controller="FirstCtrl">
+		<div class="hero-unit">
+			<h1><a href="javascript:">Angular Binding</a></h1>
+		</div>
+
+		<h2>2 + 4 = {{2 + 4}}</h2>
+		<input  type="text" placeholder="Type something…" ng-model="data.message">
+
+		<h2>{{data.message}}</h2>
+		<!-- 
+		$('.text').keyPress(function() {
+			$('h2.tes').text($(this).val());
+		});
+		-->
+		<button class="btn" ng-click="data.save()">Save</button>
+
+	</div>
+
+
+<script type="text/javascript" src="../static/js/angular.min.js"></script>
+<script type="text/javascript" src="../static/js/controllers.js"></script>
+</body>
+
+</html>
