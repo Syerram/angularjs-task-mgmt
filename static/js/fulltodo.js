@@ -22,6 +22,30 @@ todoApp.directive('avatar', function($http) {
     }
 });
 
+todoApp.directive('sorter', function($rootScope) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			var removeIntent = false;
+			element.sortable({
+				over: function () {
+                	removeIntent = false;
+            	},
+            	out: function () {
+                	removeIntent = true;
+            	},
+            	beforeStop: function (event, ui) {
+                	if(removeIntent == true){
+                		$rootScope.$broadcast('todo_removed', {'title': ui.item.data('title')});
+                    	ui.item.remove();
+                	}
+            	}
+			});
+		}
+	}
+})
+
+
 todoApp.factory('Data', function() {
 	var Todo = Parse.Object.extend("Todo");
 	var query = new Parse.Query(Todo);
@@ -46,15 +70,32 @@ todoApp.factory('Data', function() {
 				success: function(saved_todo) {
 					cb(saved_todo);
 				},
-				error: function(todo, error) {
-					alert(error);
+				error: function(todo, errr) {
+					alert(err);
+				}
+			});
+		},
+		update: function(todo, cb) {
+			todo.save(null, {
+				success: function(updated_todo) {
+					cb(updated_todo);
+				}
+			});
+		},
+		remove: function(remove_todo, cb) {
+			remove_todo.destroy({
+				success: function() {
+					cb();
+				},
+				error: function(obj, err) {
+					console.log(err);
 				}
 			});
 		}
 	}
 });
 
-todoApp.controller('TodoCtrl', function($scope, Data) {
+todoApp.controller('TodoCtrl', function($scope, $rootScope, Data) {
 	$scope.todos = {
 		new_todo: {
 			title: '',
@@ -68,6 +109,19 @@ todoApp.controller('TodoCtrl', function($scope, Data) {
 			}
 		},
 		list: [],
+		complete: function(todo) {
+			todo.set("complete", true);
+			Data.update(todo, function(updated_todo) {
+				for(i=0;i<$scope.todos.list.length;i++) {
+					if($scope.todos.list[i].attributes.title == updated_todo.attributes.title) {
+						$scope.$apply(function() {
+							$scope.todos.list.splice(i, 1);
+						});						
+						break;
+					}
+				}
+			});
+		},
 	};
 
 	$scope.init = function() {
@@ -78,4 +132,17 @@ todoApp.controller('TodoCtrl', function($scope, Data) {
 			});
 		})
 	}
+
+	$rootScope.$on('todo_removed', function(e, arg) {
+		for(i=0;i<$scope.todos.list.length;i++) {
+			if($scope.todos.list[i].attributes.title == arg.title) {
+				Data.remove($scope.todos.list[i], function() {
+					$scope.$apply(function() {
+						$scope.todos.list.splice(i, 1);	
+					});
+				});
+				break;
+			}
+		}
+	});
 });

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>Controller</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+	<style type="text/css">
+		.todo {
+			padding: 10px 0;
+			border-bottom: 1px solid #BFBFBF;
+			cursor: move;
+		}
+
+		.todo:last-child {
+			border-bottom: none;
+		}
+
+	</style>
+</head>
+<body ng-app="todoApp">
+
+	<div class="container" ng-controller="TodoCtrl" ng-init="init()">
+		<div class="hero-unit">
+			<h1>Todo</h1>
+		</div>
+
+		<!-- notes 
+			1. directive 'avatar' on the div replaces the internal content with its template
+			2. input maps to the model
+			3. ng-click invokes the function
+		-->
+		<div avatar></div>
+
+		<input type="text" placeholder="Add a todo" ng-model="todos.new_todo.title" />
+		<button class="btn" ng-click="todos.new_todo.save()">Add</button>
+
+		<div style="max-width: 340px; padding: 8px 0;" class="well">
+			<ul class="nav nav-list" sorter>
+				<!-- Some notes 
+					1. the attribute data-title will be used lated in the sorter directive 
+					2. ng-repeat loops thru the list
+					3. ng-click marks it complete and removes the item
+				-->
+				<li class="todo" data-title='{{todo.attributes.title}}' ng-repeat="todo in todos.list">
+					<input type="checkbox" ng-click="todos.complete(todo)" />
+					<span ng-bind="todo.attributes.title"/>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+<script type="text/javascript" src="../static/js/angular.min.js"></script>
+<script type="text/javascript" src="../static/js/fulltodo.js"></script>
+<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.17.min.js"></script>

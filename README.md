@@ -1,11 +1,11 @@
 # Angurlajs
 
-# EmberJS
+## EmberJS
 
 * toolbox of concepts & well suited for large framework
 * uses handlebars to mesh with Ember code
 * Can recompile on the server
-* need to get concepts conceptualized before writing code
+* need to get certain standards conceptualized before writing code
   * for e.g. to create models, you have extend Ember model [very similar to Backbone]
 
 ```javascript
@@ -17,7 +17,7 @@ var post = Discourse.Post.create();
 ```
 
 
-# AngularJS
+## AngularJS
 * Has no learning curve. no concepts just straight up coding
 * gets messy at the end due to no standards
 * relies heavily on dirty checking
@@ -25,26 +25,33 @@ var post = Discourse.Post.create();
 * up and running in no time
 
 
-# Example
+### Example
 * http://todomvc.com/
 
 
-# Binding
+### Concepts
 
-* Two way binding
-* Dirty checking
-* Controllers
-* Models
-* Scope
+* Two way binding - `index.html`
+* Dirty checking - `index.html
+* Dependency Injection - `controllers.html`
+* Controllers - `controllers.html`
+* Models - `controllers.html`
+* Scope - `scopes.html`
+  * Prototypical inheritance 
+* Directives - `directives.html`
+  * Compile
+  * Link
 * Services
-  * Backend 
-* Directives
+  * Data layer - `services.html`
+  * Backend with Parse
+  * End to end
+* Testing
 
 
-# Tips
+### Tips
 
 * Use angular-seed projects to start a project
-* Use ng-bind instead of {{}}. Otherwise when the HTML loads you might see {{}} spread out
+* Use ng-bind instead of {{}}. Otherwise when the HTML is loading, you might see {{}}
 * Use encapsulation. You will avoid scope headaches.
 * Put all server side access in Services
 * If you see repeating code, then move code to Services/Filter/Directives or even rootScope

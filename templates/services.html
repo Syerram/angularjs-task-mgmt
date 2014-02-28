@@ -2,17 +2,15 @@
 <html>
 <head>
 	<meta charset="utf-8"> 
-	<title>Controller</title>
+	<title>Services</title>
 	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
 </head>
 <body ng-app="todoApp">
 
 	<div class="container" ng-controller="TodoCtrl" ng-init="init()">
 		<div class="hero-unit">
-			<h1><a href="javascript:">Todo</a></h1>
+			<h1><a href="javascript:">Todo Part 1</a></h1>
 		</div>
-
-		<div avatar></div>
 
 		<input type="text" placeholder="Add a todo" ng-model="todos.new_todo.title" />
 		<button class="btn" ng-click="todos.new_todo.save()">Add</button>
@@ -20,7 +18,7 @@
 		<div style="max-width: 340px; padding: 8px 0;" class="well">
 			<ul class="nav nav-list">
 				<li ng-repeat="todo in todos.list">
-					<span ng-bind="todo.attributes.title"/>
+					<span ng-bind="todo"/>
 				</li>
 			</ul>
 		</div>
@@ -29,8 +27,7 @@
 
 
 <script type="text/javascript" src="../static/js/angular.min.js"></script>
-<script type="text/javascript" src="../static/js/storage.js"></script>
-<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.17.min.js"></script>
+<script type="text/javascript" src="../static/js/services.js"></script>
 </body>
 
 </html>

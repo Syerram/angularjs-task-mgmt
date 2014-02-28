@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>Scopes</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+</head>
+<body ng-app="">
+
+	<div class="container" ng-app="">
+		<div class="hero-unit">
+			<h1><a href="javascript:">Angular Scopes</a></h1>
+		</div>
+
+		<!-- set in rootScope, which is parent -->
+		<input type="text" ng-model="data.message"/>
+		<h2>Parent - {{data.message}}</h2>
+
+		<div class="container" ng-controller="FirstCtrl">
+			<!-- derived from parent scope -->
+			<input type="text" ng-model="data.message"/>
+			<h2>First - {{data.message}}</h2>
+		</div>
+		<div class="container" ng-controller="SecondCtrl">
+			<!-- derived from parent scope -->
+			<input type="text" ng-model="data.message"/>
+			<h2>Second - {{data.message}}</h2>
+		</div>
+	</div>
+
+
+<script type="text/javascript" src="../static/js/angular.min.js"></script>
+<script type="text/javascript" src="../static/js/scopes.js"></script>
+</body>
+
+</html>
